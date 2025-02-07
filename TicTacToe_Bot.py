@@ -23,9 +23,24 @@ class machinelearning_TicTacToe ():
 def check_win(code):
     if not type(code) is list or len(code)<9:
         raise ValueError("ERROR: CODE IS EITHER TOO SHORT OR NOT A LIST")
+    # horizontal
     if code[0] == code[1] and code[1] == code[2]:
         return f"{code[0]} Win"
     if code[3] == code[4] and code[4] == code[5]:
+        return f"{code[0]} Win"
+    if code[6] == code[7] and code[7] == code[8]:
+        return f"{code[0]} Win"
+    # vertical
+    if code[0] == code[3] and code[3] == code[6]:
+        return f"{code[0]} Win"
+    if code[1] == code[4] and code[4] == code[7]:
+        return f"{code[0]} Win"
+    if code[2] == code[5] and code[5] == code[8]:
+        return f"{code[0]} Win"
+    # diagonal
+    if code[0] == code[4] == code[8]:
+        return f"{code[0]} Win"
+    if code[2] == code[4] == code[6]:
         return f"{code[0]} Win"
     return "continue"
 
