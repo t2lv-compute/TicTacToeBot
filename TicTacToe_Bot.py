@@ -20,8 +20,17 @@ class machinelearning_TicTacToe ():
         self.boards = {}
         self.name = name
 
+def check_win(code):
+    if not type(code) is list or len(code)<9:
+        raise ValueError("ERROR: CODE IS EITHER TOO SHORT OR NOT A LIST")
+    if code[0] == code[1] and code[1] == code[2]:
+        return f"{code[0]} Win"
+    if code[3] == code[4] and code[4] == code[5]:
+        return f"{code[0]} Win"
+    return "continue"
+
 def render_board(code=[" "," "," "," "," "," "," "," "," "]):
-    if len(code)<9 or not type(code) is list:
+    if not type(code) is list or len(code)<9:
         return "ERROR: CODE IS EITHER TOO SHORT OR NOT A LIST"
     board = []
     for i in range(0,len(code)*4,4):
@@ -37,13 +46,14 @@ def render_board(code=[" "," "," "," "," "," "," "," "," "]):
     board.insert(0,"\n")
     board.insert(13,"---|---|---\n")
     board.insert(26,"---|---|---\n")
-    board.insert(-1,"\n")
+    #board.insert(-1,"\n")
     #print(board)
     board = "".join(board)
     print(board)
     return board
 
 #render_board(["X","X","O","O","O","X","X","O","X"])
+#check_win(1)
 bot = machinelearning_TicTacToe("TobAI")
 
 print("Welcome to TicTacToe!")
@@ -51,8 +61,20 @@ opponent = input("Press 1 to play against a human and 2 to play against AI.\n   
 if None:
     pass
 else:
-    current_board = [" "," "," "," "," "," "," "," "," "]
+    current_board = ["1","2","3","4","5","6","7","8","9"]
     print("GAME START!")
+    player = "X"
+    move = "pass"
     while True:
         render_board(current_board)
-        move = input("Enter your move (1-9):\n    >>> ")
+        while move == "pass" or current_board[int(move)-1].isalpha():
+            move = input(f"Player {player}'s Turn\n\nEnter your move, by square, regardless of existing moves. If you have already done so, you may be trying to overwrite an existing move. (1-9):\n    >>> ")
+        if player == "X":
+            current_board[int(move)-1]="X"
+            player = "O"
+        else: 
+            current_board[int(move)-1]="O"
+            player = "X"
+        if check_win != "continue":
+            print(check_win(current_board))
+            break
