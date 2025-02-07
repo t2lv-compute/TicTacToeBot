@@ -70,10 +70,10 @@ def render_board(code=[" "," "," "," "," "," "," "," "," "]):
 
 #render_board(["X","X","O","O","O","X","X","O","X"])
 #check_win(1)
-pygame.init()
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
+# pygame.init()
+# screen_width = 800
+# screen_height = 600
+# screen = pygame.display.set_mode((screen_width, screen_height))
 
 bot = machinelearning_TicTacToe("TobAI")
 
@@ -87,6 +87,7 @@ else:
     player = "X"
     move = "pass"
     while True:
+        render_board(current_board)
         while move == "pass" or current_board[int(move)-1].isalpha():
             move = input(f"Player {player}'s Turn\n\nEnter your move, by square. If you have already done so, you may be trying to overwrite an existing move. (1-9):\n    >>> ")
         if player == "X":
