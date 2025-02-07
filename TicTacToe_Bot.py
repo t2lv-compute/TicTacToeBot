@@ -1,5 +1,6 @@
 import random
 import math
+import pygame # type: ignore
 
 class machinelearning_TicTacToe ():
     def __init__(self, name):
@@ -27,21 +28,21 @@ def check_win(code):
     if code[0] == code[1] and code[1] == code[2]:
         return f"{code[0]} Win"
     if code[3] == code[4] and code[4] == code[5]:
-        return f"{code[0]} Win"
+        return f"{code[3]} Win"
     if code[6] == code[7] and code[7] == code[8]:
-        return f"{code[0]} Win"
+        return f"{code[6]} Win"
     # vertical
     if code[0] == code[3] and code[3] == code[6]:
         return f"{code[0]} Win"
     if code[1] == code[4] and code[4] == code[7]:
-        return f"{code[0]} Win"
+        return f"{code[1]} Win"
     if code[2] == code[5] and code[5] == code[8]:
-        return f"{code[0]} Win"
+        return f"{code[2]} Win"
     # diagonal
     if code[0] == code[4] == code[8]:
         return f"{code[0]} Win"
     if code[2] == code[4] == code[6]:
-        return f"{code[0]} Win"
+        return f"{code[2]} Win"
     return "continue"
 
 def render_board(code=[" "," "," "," "," "," "," "," "," "]):
@@ -69,6 +70,11 @@ def render_board(code=[" "," "," "," "," "," "," "," "," "]):
 
 #render_board(["X","X","O","O","O","X","X","O","X"])
 #check_win(1)
+pygame.init()
+screen_width = 800
+screen_height = 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+
 bot = machinelearning_TicTacToe("TobAI")
 
 print("Welcome to TicTacToe!")
@@ -81,15 +87,17 @@ else:
     player = "X"
     move = "pass"
     while True:
-        render_board(current_board)
         while move == "pass" or current_board[int(move)-1].isalpha():
-            move = input(f"Player {player}'s Turn\n\nEnter your move, by square, regardless of existing moves. If you have already done so, you may be trying to overwrite an existing move. (1-9):\n    >>> ")
+            move = input(f"Player {player}'s Turn\n\nEnter your move, by square. If you have already done so, you may be trying to overwrite an existing move. (1-9):\n    >>> ")
         if player == "X":
             current_board[int(move)-1]="X"
             player = "O"
         else: 
             current_board[int(move)-1]="O"
             player = "X"
-        if check_win != "continue":
-            print(check_win(current_board))
+        if "Win" in check_win(current_board).split():
+            print()
+            print(check_win(current_board)+"!")
+            #print()
+            render_board(current_board)
             break
