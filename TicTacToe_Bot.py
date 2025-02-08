@@ -15,7 +15,8 @@ class machinelearning_TicTacToe ():
         if board_pos in self.boards:
             return random.choice(self.boards[board_pos])
         else:
-            return None #  code here that just returns a random position
+            self.boards[board_pos]=None
+            return random.choice(self.boards[board_pos]) #  code here that just returns a random position
     def reset(self,name):
         #self.boards: dict -- ex: [1,2,"x",3,"o",4,5,6,7]:[1,1,1,1,2,2,3,3,3,4,4,4,4,4,4,5,5,5,6,6,6,6,6,6,7]
         self.boards = {}
