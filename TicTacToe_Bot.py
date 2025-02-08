@@ -23,6 +23,7 @@ class machinelearning_TicTacToe ():
         self.name = name
 
 def check_win(code):
+    '''Given a board code, check for a win.'''
     if not type(code) is list or len(code)<9:
         raise ValueError("ERROR: CODE IS EITHER TOO SHORT OR NOT A LIST")
     # horizontal
